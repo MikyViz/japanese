@@ -428,6 +428,30 @@ body {
   text-shadow: 0 0 10px rgba(194, 65, 12, 0.3);
 }
 
+.grammar-notes {
+  background: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  padding: 1rem;
+  margin-top: 16px;
+  border-left: 3px solid var(--color-primary);
+}
+
+.grammar-notes-text {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+#grammar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#grammar-content .grammar-card {
+  margin-bottom: 0;
+}
+
 /* Квиз */
 .quiz-container {
   background: linear-gradient(135deg, var(--color-background-secondary) 0%, var(--color-background-primary) 100%);

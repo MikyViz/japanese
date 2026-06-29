@@ -21,6 +21,7 @@
       <button class="filter-btn active" data-filter="all" data-target="hiragana">Все вместе</button>
       <button class="filter-btn" data-filter="day1" data-target="hiragana">День 1 (あ, か)</button>
       <button class="filter-btn" data-filter="day2" data-target="hiragana">День 2 (さ, た)</button>
+      <button class="filter-btn" data-filter="day3" data-target="hiragana">День 3 (な, は)</button>
     </div>
     <div id="hiragana-grid" class="card-grid"></div>
   </div>
@@ -30,31 +31,24 @@
       <button class="filter-btn active" data-filter="all" data-target="radicals">Все вместе</button>
       <button class="filter-btn" data-filter="day1" data-target="radicals">День 1 (人–山)</button>
       <button class="filter-btn" data-filter="day2" data-target="radicals">День 2 (火–小)</button>
+      <button class="filter-btn" data-filter="day3" data-target="radicals">День 3 (月–女)</button>
     </div>
     <div id="radical-grid" class="card-grid"></div>
   </div>
 
   <div id="panel-grammar" class="panel" style="display: none;">
-    <div class="grammar-card">
-      <div class="grammar-label">Частица темы</div>
-      <div class="grammar-char">は <span class="grammar-pronunciation">(читается wa)</span></div>
-      <div class="grammar-description">Показывает, о чём идёт речь в предложении — "что касается..."</div>
-      <div class="grammar-structure-box">
-        <div class="grammar-small-label">Структура</div>
-        <div class="grammar-formula">[ Тема ] <span class="particle-highlight">は</span> [ Информация ] です</div>
-      </div>
-      <div class="grammar-example-box">
-        <div class="grammar-small-label">Пример</div>
-        <div class="grammar-example">私<span class="particle-highlight">は</span>学生です</div>
-        <div class="grammar-translation">watashi wa gakusei desu — "Я — студент"</div>
-      </div>
+    <div class="filter-container">
+      <button class="filter-btn active" data-grammar-day="day2">День 2</button>
+      <button class="filter-btn" data-grammar-day="day3">День 3</button>
     </div>
+    <div id="grammar-content"></div>
   </div>
 
   <div id="panel-quiz" class="panel" style="display: none;">
     <div class="filter-container">
       <button class="filter-btn active" data-quiz-filter="all">Все вместе</button>
       <button class="filter-btn" data-quiz-filter="day1">День 1</button>
+      <button class="filter-btn" data-quiz-filter="day3">День 3</button>
       <button class="filter-btn" data-quiz-filter="day2">День 2</button>
     </div>
     <div class="quiz-container">
@@ -75,6 +69,7 @@
   </div>
 
   <script src="data.js"></script>
+  <script src="grammar.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

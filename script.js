@@ -37,16 +37,100 @@ function buildCard(item, isRadical, day) {
 
 // Генерация карточек хираганы
 const hGrid = document.getElementById('hiragana-grid');
-hiragana.forEach((item, index) => {
-  const day = index < 10 ? 'day1' : 'day2'; // Первые 10 - день 1, остальные - день 2
-  hGrid.appendChild(buildCard(item, false, day));
+hiragana.forEach((item) => {
+  hGrid.appendChild(buildCard(item, false, `day${item.day}`));
 });
 
 // Генерация карточек радикалов
 const radGrid = document.getElementById('radical-grid');
-radicals.forEach((item, index) => {
-  const day = index < 5 ? 'day1' : 'day2'; // Первые 5 - день 1, остальные - день 2
-  radGrid.appendChild(buildCard(item, true, day));
+radicals.forEach((item) => {
+  radGrid.appendChild(buildCard(item, true, `day${item.day}`));
+});
+
+// Функция отображения грамматики
+let currentGrammarDay = 'day2';
+
+function displayGrammar(day) {
+  const grammarContent = document.getElementById('grammar-content');
+  grammarContent.innerHTML = '';
+  
+  const grammarItems = grammarData[day] || [];
+  
+  grammarItems.forEach(item => {
+    const card = document.createElement('div');
+    card.className = 'grammar-card';
+    
+    let html = `<div class="grammar-label">${item.topic}</div>`;
+    
+    if (item.reading) {
+      html += `<div class="grammar-char">${item.reading}</div>`;
+    }
+    
+    html += `<div class="grammar-description">${item.explanation}</div>`;
+    
+    if (item.structure) {
+      // Выделяем частицы в структуре
+      let structureHTML = item.structure
+        .replace(/は/g, '<span class="particle-highlight">は</span>')
+        .replace(/を/g, '<span class="particle-highlight">を</span>');
+      
+      html += `
+        <div class="grammar-structure-box">
+          <div class="grammar-small-label">Структура</div>
+          <div class="grammar-formula">${structureHTML}</div>
+        </div>
+      `;
+    }
+    
+    if (item.example) {
+      // Выделяем частицы в примере
+      let exampleHTML = item.example.jp
+        .replace(/は/g, '<span class="particle-highlight">は</span>')
+        .replace(/を/g, '<span class="particle-highlight">を</span>');
+      
+      html += `
+        <div class="grammar-example-box">
+          <div class="grammar-small-label">Пример</div>
+          <div class="grammar-example">${exampleHTML}</div>
+          <div class="grammar-translation">${item.example.romaji} — "${item.example.ru}"</div>
+        </div>
+      `;
+    }
+    
+    if (item.notes) {
+      html += `
+        <div class="grammar-notes">
+          <div class="grammar-small-label">Примечание</div>
+          <div class="grammar-notes-text">${item.notes}</div>
+        </div>
+      `;
+    }
+    
+    card.innerHTML = html;
+    grammarContent.appendChild(card);
+  });
+}
+
+// Отображаем грамматику дня 2 по умолчанию
+displayGrammar(currentGrammarDay);
+
+// Переключение грамматики по дням
+document.querySelectorAll('[data-grammar-day]').forEach(btn => {
+  btn.onclick = () => {
+    currentGrammarDay = btn.dataset.grammarDay;
+    
+    // Убираем активность со всех кнопок
+    const container = btn.closest('.filter-container');
+    container.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.remove('active');
+    });
+    
+    // Активируем текущую кнопку
+    btn.classList.add('active');
+    
+    // Показываем грамматику выбранного дня
+    displayGrammar(currentGrammarDay);
+  };
 });
 
 // Переключение табов
@@ -68,8 +152,8 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   };
 });
 
-// Фильтрация карточек
-document.querySelectorAll('.filter-btn').forEach(btn => {
+// Фильтрация карточек (исключаем кнопки грамматики)
+document.querySelectorAll('.filter-btn:not([data-grammar-day])').forEach(btn => {
   btn.onclick = () => {
     const filter = btn.dataset.filter;
     const target = btn.dataset.target;
@@ -110,8 +194,8 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 // Квиз
 const quizPool = [
-  ...hiragana.map((h, i) => ({ch: h.ch, r: h.r, day: i < 10 ? 'day1' : 'day2'})), 
-  ...radicals.map((r, i) => ({ch: r.ch, r: r.r.split(' / ')[0].split(' ')[0], day: i < 5 ? 'day1' : 'day2'}))
+  ...hiragana.map((h) => ({ch: h.ch, r: h.r, day: `day${h.day}`})), 
+  ...radicals.map((r) => ({ch: r.ch, r: r.r.split(' / ')[0].split(' ')[0], day: `day${r.day}`}))
 ];
 let quizOrder = [];
 let quizIdx = 0;
