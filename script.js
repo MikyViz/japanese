@@ -14,19 +14,16 @@ function buildCard(item, isRadical, day) {
   if (isRadical) {
     card.innerHTML = `
       <div class="card-char">${item.ch}</div>
-      <div class="card-reading">${item.r} — ${item.mean}</div>
+      <div class="card-reading">${item.r} — ${item.meaning}</div>
       <div class="radical-card-mnemonic">
-        <div class="mnemonic-label">Форма / смысл</div>
-        <div class="mnemonic-text">${item.mForm}</div>
-        <div class="mnemonic-label">Звучание</div>
-        <div class="mnemonic-text">${item.mSound}</div>
+        <div class="mnemonic-text">${item.mnemonic}</div>
       </div>
     `;
   } else {
     card.innerHTML = `
       <div class="card-char">${item.ch}</div>
       <div class="card-reading">${item.r}</div>
-      <div class="card-mnemonic">${item.m}</div>
+      <div class="card-mnemonic">${item.mnemonic}</div>
     `;
   }
   
