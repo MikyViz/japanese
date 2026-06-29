@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Японский язык - День 2</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h2 class="sr-only">Тренажёр второго урока японского: хирагана са-ряд и та-ряд, новые радикалы кандзи, частица は, и расширенный квиз по дням 1-2</h2>
+
+  <div class="tabs-container" id="tabs">
+    <button class="tab-btn active" data-tab="hiragana">Хирагана</button>
+    <button class="tab-btn" data-tab="radicals">Радикалы</button>
+    <button class="tab-btn" data-tab="grammar">Грамматика</button>
+    <button class="tab-btn" data-tab="quiz">Проверка себя</button>
+  </div>
+
+  <div id="panel-hiragana" class="panel">
+    <div class="filter-container">
+      <button class="filter-btn active" data-filter="all" data-target="hiragana">Все вместе</button>
+      <button class="filter-btn" data-filter="day1" data-target="hiragana">День 1 (あ, か)</button>
+      <button class="filter-btn" data-filter="day2" data-target="hiragana">День 2 (さ, た)</button>
+    </div>
+    <div id="hiragana-grid" class="card-grid"></div>
+  </div>
+
+  <div id="panel-radicals" class="panel" style="display: none;">
+    <div class="filter-container">
+      <button class="filter-btn active" data-filter="all" data-target="radicals">Все вместе</button>
+      <button class="filter-btn" data-filter="day1" data-target="radicals">День 1 (人–山)</button>
+      <button class="filter-btn" data-filter="day2" data-target="radicals">День 2 (火–小)</button>
+    </div>
+    <div id="radical-grid" class="card-grid"></div>
+  </div>
+
+  <div id="panel-grammar" class="panel" style="display: none;">
+    <div class="grammar-card">
+      <div class="grammar-label">Частица темы</div>
+      <div class="grammar-char">は <span class="grammar-pronunciation">(читается wa)</span></div>
+      <div class="grammar-description">Показывает, о чём идёт речь в предложении — "что касается..."</div>
+      <div class="grammar-structure-box">
+        <div class="grammar-small-label">Структура</div>
+        <div class="grammar-formula">[ Тема ] <span class="particle-highlight">は</span> [ Информация ] です</div>
+      </div>
+      <div class="grammar-example-box">
+        <div class="grammar-small-label">Пример</div>
+        <div class="grammar-example">私<span class="particle-highlight">は</span>学生です</div>
+        <div class="grammar-translation">watashi wa gakusei desu — "Я — студент"</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-quiz" class="panel" style="display: none;">
+    <div class="filter-container">
+      <button class="filter-btn active" data-quiz-filter="all">Все вместе</button>
+      <button class="filter-btn" data-quiz-filter="day1">День 1</button>
+      <button class="filter-btn" data-quiz-filter="day2">День 2</button>
+    </div>
+    <div class="quiz-container">
+      <p class="quiz-progress" id="quiz-progress">Вопрос 1 из 10</p>
+      <div class="quiz-char" id="quiz-char">あ</div>
+      <p class="quiz-question" id="quiz-question">Как читается этот знак?</p>
+      <input type="text" id="quiz-input" class="quiz-input" placeholder="введи латиницей" autocomplete="off" />
+      <div class="quiz-buttons">
+        <button id="quiz-check">Проверить</button>
+        <button id="quiz-skip">Дальше</button>
+      </div>
+      <p id="quiz-feedback" class="quiz-feedback"></p>
+    </div>
+    <div class="quiz-footer">
+      <span>Правильно: <span id="quiz-correct" class="quiz-score">0</span></span>
+      <button id="quiz-restart" class="quiz-restart-btn">Начать заново</button>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
